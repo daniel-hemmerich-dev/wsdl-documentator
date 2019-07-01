@@ -1,0 +1,8 @@
+# Build Server from Docker-File
+docker-compose up -d
+
+# execute composer
+docker-compose exec php php /usr/share/nginx/html/private/composer.phar install --working-dir=/usr/share/nginx/html/private/
+
+# Base URL for local docker applications
+http://0.0.0.0:8080/

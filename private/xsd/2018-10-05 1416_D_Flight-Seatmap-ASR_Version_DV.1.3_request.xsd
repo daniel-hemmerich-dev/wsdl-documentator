@@ -1,0 +1,1383 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:annotation>
+    <xsd:documentation>Flight-Seatmap-ASR</xsd:documentation>
+  </xsd:annotation>
+  <xsd:element name="Request" type="Flight-Seatmap-ASR-RequestType-Request"/>
+  <xsd:complexType name="Flight-Seatmap-ASR-RequestType-Request">
+    <xsd:sequence>
+      <xsd:element name="Avl" type="Flight-Seatmap-ASR-AvlType-Request" minOccurs="0"/>
+      <xsd:element name="Fat" type="Flight-Seatmap-ASR-FatType-Request" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Fap" type="Flight-Seatmap-ASR-FapType-Request" minOccurs="0"/>
+      <xsd:element name="Fab" type="Flight-Seatmap-ASR-FabType-Request" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="Version" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Version number of the XML message, The first two characters are helpful to differ between the different versions between the external partners
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="8"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="From" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Sender of the message
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="To" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Receiver of the message
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="STermId">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          A Code which could be used in NURVIS as user-code
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="9"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Unit" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          ???
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Window">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Window-Id
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Date" type = "DateType" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Date when the message was sent (part of the timestamp)
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="Time" type = "TimeType" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Time when the message was sent (part of the timestamp)
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="Type" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Together with SubType, the Type identifies the requested NURVIS-Service. The Type is used for a first distinction between availability services and booking services.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="15"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SubType" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Together with Type, the SubType identifies the requested NURVIS-Service.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Agent" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Code of the Agency
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="RSystem">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          TC internal use only (KOSYP, ASP)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Lang" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          ISO language code (DE, FR, ...)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Mode" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Values: Test, Qual, Prod
+Identifies the system level (Test-, Quality- or Production-Level)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="UserCode">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          ???
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="13"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="EducBook" type = "YesNoType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Is set to "Y" for educational booking, "N" is default
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="IComClient">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Internetkennzeichen
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Flight-Seatmap-ASR-FabType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        To store or to show all bookable information
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Saison">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Saison
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="SourceID">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          SourceID (in YKSS) of the record is sent
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="9"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="HashCode">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          MD5 Hash to encode some informations
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="32"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Flight-Seatmap-ASR-FatType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Group-element to store a Transport-position
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Currency" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Currency 
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="StartDate" type = "DateType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Starting date of the transportation
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Duration" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Duration of the service
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Dep" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Code of the Departure Airport
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Arr" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Code of the Arrival Airport
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Class" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Class of transportation (will be decomissioned in the next release, instead use CabinClass)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ServiceClass" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Description of the service class  (will be decomissioned in the next release, instead use CabinClass)
+Not used yet.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Chain" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Flight chain
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Carrier" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Code of the Carrier of the first leg.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="FlightNr" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Flight number of the first leg without carrier code
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="5"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DepTime" type = "TimeType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Time of departure
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ArrTime" type = "TimeType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Time of arrival
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="SystemPortal" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          SYPO-Code
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="InternalTcReference" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          ABK-REFERENZ-ID
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Status" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Status of the transportation.
+'OK': seats available
+'NK': no seats available
+'RM': service on request - not confirmed
+'RQ': service on request - confirmed
+'XX': service cancelled
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="StatusTech" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Technical status
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Adults" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of adults 
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Children" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of children
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Infants" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of infants
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="RealDate" type = "DateType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Real departure date of the transportation (relevant for overnight-flight)
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="RealDepAirport" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Real departure airport (relevant for departure "PAR")
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="RealArrAirport" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Real arrival airport (relevant for arrival "PAR")
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="RealDepTerminal" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Real departure airport-terminal (relevant for departure "PAR")
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ChangePossibility" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Update via external plattform possible
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="5"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Changed" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Kind of change in RAPO for external Systems.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="SeatReservation" type="Flight-Seatmap-ASR-SeatReservationType-Request" minOccurs="0"/>
+      <xsd:element name="Persons" type="Flight-Seatmap-ASR-PersonsType-Request" minOccurs="0"/>
+      <xsd:element name="Leg" type="Flight-Seatmap-ASR-LegType-Request" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="ServiceType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Type of transportation.
+F = flight
+B = Bus   (not used yet)
+T = train  (not used yet)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Key">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Internal key which must  be sent back by Nerus without any modification.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1000"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SegRef">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Indicates the position of this service in the service-list
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Direction">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Direction of the transportation.
+'H' = outbound transport
+'R' = inbound transport
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SeatRes">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Seatreservation: Y=possible, N=not possible, SR=exists
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Flight-Seatmap-ASR-FapType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        To store bookable information about a passenger
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="PersonType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Type of traveller or form of address.
+'1': masculine 
+'2': female    
+'4': infant     
+'3': child
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Sex" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          male or female (1=male,2=female)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Title" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Title of the person (optional)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Name" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Family name of the traveler
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="FirstName" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          First name of the traveler
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Age" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Age of the traveler (optional for adults, mandatory for children and infants)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Birth" type = "DateType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Date of Birth (optional)
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="PricePerson" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Sum of prices for the traveler.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+(,[0-9][0-9])?"/>
+            <xsd:maxLength value="12"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="ID">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Numeration of passengers beginning with 1
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Key">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Internal key used by NURVIS, which must be sent back by Nerus without any modification.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1000"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Flight-Seatmap-ASR-PersonsType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        List of references to fap-elements
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="IdRef" minOccurs="0" maxOccurs="unbounded">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Reference to the ID of an fap-element
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Flight-Seatmap-ASR-LegType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Leg-Information
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="DepDate" type = "DateType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Date of departure
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ArrDate" type = "DateType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Date of Arrival
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Dep" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          IATA-Code departure-airport
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Arr" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          IATA-Code arrival-airport
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Class" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Class of the flight (will be decomissioned in the next release, instead use BookingClass)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ServiceClass" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          service of this seat (will be decomissioned in the next release, instead use CabinClass)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Carrier" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Carrier-code
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="FlightNr" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Flight-number
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="5"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DepTime" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Departure-time
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ArrTime" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Arrival-time
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ExtPortal" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          externes Portal
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ExtPortalRef" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Referenz-Nummer des externen Portals
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="15"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ChangePossibility" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Update via external plattform possible
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="5"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="SeatReservation" type="Flight-Seatmap-ASR-SeatReservationType-Request" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="SpecialServiceRequest" type="Flight-Seatmap-ASR-SpecialServiceRequestType-Request" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="Key">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Internal key used by NURVIS which must be sent back by Nerus without any modification.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1000"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="External" type = "YesNoType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          External=Y when the Leg is booked with an external booking system
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Flight-Seatmap-ASR-AvlType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Asking for an availability
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="TOCode">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Tour Operator code (brand code)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Catalog" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Tour Operator catalogue
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="SercCode">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Service Center Code
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Saison">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Saison
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="StartDate" type = "DateType"  >
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Starting date of the service
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Duration">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Duration of the service
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Adults">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of adults
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Children" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of children
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Infants" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of infants
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="TrpType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Type of transport: F-flight, Z-train, B-bus, Default is "F"
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OutDep">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Departure airport of outbound flight
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OutArr">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Arrival airport of outbound flight
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OutClass">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Flight class of outbound flight
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OutServiceClass" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Flight class of outbound flight
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OutCarrier">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Carriercode of outbound flight
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OutChain">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Flight chain of outbound flight
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="InDep">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Departure airport of inbound flight
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="InArr">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Arrival airport of inbound flight 
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="InClass">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Flight class of inbound flight
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="InServiceClass" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Flight class of inbound flight
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="InCarrier">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Carriercode of inbound flight
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="InChain">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Flight chain of inbound flight
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Flight-Seatmap-ASR-SeatReservationType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Booked Seats in Booking
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="Key">
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="IdRef">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Reference to the ID of an fap-element
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Row">
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Seat">
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SeatCategory">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Category of the selected seat
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="PricePerson">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Price for Seatreservation
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Flight-Seatmap-ASR-SpecialServiceRequestType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Booked Seats in Booking
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="Key">
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="IdRef">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Reference to the ID of an fap-element
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SSRCode">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          IATA Code of SSR (Target from AVC-Product)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SSRDesc">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Description of SSR
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="80"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+     <xsd:simpleType name="DateType">
+        <xsd:restriction base="xsd:string">
+           <xsd:maxLength value="8"/>
+            <xsd:pattern value="(([0-2][0-9])|(3[0-1]))(0[1-9]|1[0-2])(19|2[0-9])[0-9][0-9]"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+     <xsd:simpleType name="DateType2">
+        <xsd:restriction base="xsd:string">
+           <xsd:maxLength value="10"/>
+            <xsd:pattern value="(([0-2][0-9])|(3[0-1])).(0[1-9]|1[0-2]).(19|2[0-9])[0-9][0-9]"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+     <xsd:simpleType name="DateTimeType">
+        <xsd:restriction base="xsd:string">
+           <xsd:maxLength value="14"/>
+            <xsd:pattern value="(([0-2][0-9])|(3[0-1]))(0[1-9]|1[0-2])(19|2[0-9])[0-9][0-9](([0-1][0-9])|(2[0-3]))[0-5][0-9][0-5][0-9]"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="TimeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+            <xsd:pattern value="(([0-1][0-9])|(2[0-3]))[0-5][0-9]"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="YesNoType">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+            <xsd:pattern value="(N|Y)"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

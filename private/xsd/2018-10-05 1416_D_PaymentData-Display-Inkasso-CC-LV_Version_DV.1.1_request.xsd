@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:annotation>
+    <xsd:documentation>PaymentData-Display-Inkasso-CC-LV</xsd:documentation>
+  </xsd:annotation>
+  <xsd:element name="Request" type="PaymentData-Display-Inkasso-CC-LV-RequestType-Request"/>
+  <xsd:complexType name="PaymentData-Display-Inkasso-CC-LV-RequestType-Request">
+    <xsd:sequence>
+      <xsd:element name="Fab" type="PaymentData-Display-Inkasso-CC-LV-FabType-Request"/>
+    </xsd:sequence>
+    <xsd:attribute name="Version" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Version number of the XML message, The first two characters are helpful to differ between the different versions between the external partners
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="8"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="From" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Sender of the message
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="To" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Receiver of the message
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="STermId">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          A Code which could be used in NURVIS as user-code
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="9"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Unit" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          ???
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Window">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Window-Id
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Date" type = "DateType" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Date when the message was sent (part of the timestamp)
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="Time" type = "TimeType" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Time when the message was sent (part of the timestamp)
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="Type" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Together with SubType, the Type identifies the requested NURVIS-Service. The Type is used for a first distinction between availability services and booking services.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="15"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SubType" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Together with Type, the SubType identifies the requested NURVIS-Service.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Confirm" type = "YesNoType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Nerus sets this attribute to "Y" if the agent confirmed compulsory information (TextC-Elements were included in response). Default is "N".
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="Agent" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Code of the Agency
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="RSystem">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Code of the Agency (KOSYP)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Lang" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          ISO language code (DE, FR, ...)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Mode" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Values: Test, Qual, Prod
+Identifies the system level (Test-, Quality- or Production-Level)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="UserCode">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          ???
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="13"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="EducBook" type = "YesNoType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Is set to "Y" for educational booking, "N" is default
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="IComClient">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Internetkennzeichen
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="PaymentData-Display-Inkasso-CC-LV-FabType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        To store or to show all bookable information
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="TOCode" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Tour operator code (= brand code)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Catalog" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Tour operator catalogue
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="AccountNr">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Booking number, 8 digits number
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="8"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="VersionNr" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Version of the reservation
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="Key">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Internal key used by NURVIS which must be sent back by Nerus without any modification.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1000"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SellAgent">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          SalesAgent
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+     <xsd:simpleType name="DateType">
+        <xsd:restriction base="xsd:string">
+           <xsd:maxLength value="8"/>
+            <xsd:pattern value="(([0-2][0-9])|(3[0-1]))(0[1-9]|1[0-2])(19|2[0-9])[0-9][0-9]"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+     <xsd:simpleType name="DateType2">
+        <xsd:restriction base="xsd:string">
+           <xsd:maxLength value="10"/>
+            <xsd:pattern value="(([0-2][0-9])|(3[0-1])).(0[1-9]|1[0-2]).(19|2[0-9])[0-9][0-9]"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+     <xsd:simpleType name="DateTimeType">
+        <xsd:restriction base="xsd:string">
+           <xsd:maxLength value="14"/>
+            <xsd:pattern value="(([0-2][0-9])|(3[0-1]))(0[1-9]|1[0-2])(19|2[0-9])[0-9][0-9](([0-1][0-9])|(2[0-3]))[0-5][0-9][0-5][0-9]"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="TimeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+            <xsd:pattern value="(([0-1][0-9])|(2[0-3]))[0-5][0-9]"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="YesNoType">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+            <xsd:pattern value="(N|Y)"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

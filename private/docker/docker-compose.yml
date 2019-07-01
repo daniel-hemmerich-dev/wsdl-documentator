@@ -1,0 +1,17 @@
+version: '3'
+services:
+  web:
+    image: nginx:alpine
+    ports:
+    - "8080:80"
+    volumes:
+    - ../../:/usr/share/nginx/html
+    - ./site.conf:/etc/nginx/conf.d/site.conf
+    links:
+    - php
+  php:
+    build:
+      context: .
+      dockerfile: php/Dockerfile
+    volumes:
+    - ../../:/usr/share/nginx/html

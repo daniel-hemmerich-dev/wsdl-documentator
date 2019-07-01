@@ -1,0 +1,40 @@
+body {
+
+}
+
+body * {
+	font-family: "Times New Roman", Times, serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Verdana", Arial, sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+div.example {
+	background-color: lightgray;
+	border-top: gray solid 1pt;
+	border-left: gray solid 1pt;
+	padding: 10pt;
+}
+
+table, th, td {
+	border: 1pt solid black;
+	border-collapse: collapse;
+}
+
+tr:hover {
+	background-color: lightgray;
+}
+
+th, td {
+	text-align: left;
+	padding: 5pt;
+}

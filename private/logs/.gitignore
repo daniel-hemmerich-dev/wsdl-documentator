@@ -1,0 +1,5 @@
+# include the folder but not its content. exclude all files except the gitignore-file itself
+*
+
+# include this file, so the directory is not empty and will be commited
+!.gitignore

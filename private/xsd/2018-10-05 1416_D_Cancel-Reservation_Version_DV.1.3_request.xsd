@@ -1,0 +1,2201 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:annotation>
+    <xsd:documentation>Cancel-Reservation</xsd:documentation>
+  </xsd:annotation>
+  <xsd:element name="Request" type="Cancel-Reservation-RequestType-Request"/>
+  <xsd:complexType name="Cancel-Reservation-RequestType-Request">
+    <xsd:sequence>
+      <xsd:element name="Fab" type="Cancel-Reservation-FabType-Request"/>
+    </xsd:sequence>
+    <xsd:attribute name="Version" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Version number of the XML message, The first two characters are helpful to differ between the different versions between the external partners
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="8"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="From" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Sender of the message
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="To" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Receiver of the message
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="STermId">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          A Code which could be used in NURVIS as user-code
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="9"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Unit" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          ???
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Window">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Window-Id
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Date" type = "DateType" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Date when the message was sent (part of the timestamp)
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="Time" type = "TimeType" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Time when the message was sent (part of the timestamp)
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="Type" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Together with SubType, the Type identifies the requested NURVIS-Service. The Type is used for a first distinction between availability services and booking services.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="15"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SubType" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Together with Type, the SubType identifies the requested NURVIS-Service.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Confirm" type = "YesNoType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Nerus sets this attribute to "Y" if the agent confirmed compulsory information (TextC-Elements were included in response). Default is "N".
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="Agent" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Code of the Agency
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="RSystem">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Code of the Agency (KOSYP)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Lang" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          ISO language code (DE, FR, ...)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Mode" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Values: Test, Qual, Prod
+Identifies the system level (Test-, Quality- or Production-Level)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="UserCode">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          ???
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="13"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="EducBook" type = "YesNoType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Is set to "Y" for educational booking, "N" is default
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="IComClient">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Internetkennzeichen
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-FabType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        To store or to show all bookable information
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="TOCode" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Tour operator code (= brand code)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Catalog" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Tour operator catalogue
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Currency" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Currency
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Price" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Price
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="AddPrice" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Price on flight service
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Pers_Nr" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          PersonalNr of expedient
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="AccountNr">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Booking number, 8 digits number
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="8"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="VersionNr" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Version of the reservation
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DueDateDeposit" type = "DateType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Due date of the deposit payment
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="DueDateFinalPay" type = "DateType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Due date of the final payment
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ExpiNr" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Discount Nr. e.g. EasyWayNr
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="30"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ManualPrices" type="Cancel-Reservation-ManualPricesType-Request" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Fat" type="Cancel-Reservation-FatType-Request" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Fah" type="Cancel-Reservation-FahType-Request" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Fac" type="Cancel-Reservation-FacType-Request" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Fap" type="Cancel-Reservation-FapType-Request" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Customer" type="Cancel-Reservation-CustomerType-Request" minOccurs="0"/>
+      <xsd:element name="ManualFee" type="Cancel-Reservation-ManualFeeType-Request" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="Key">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Internal key used by NURVIS which must be sent back by Nerus without any modification.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1000"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SellAgent">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          SalesAgent
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-FatType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Group-element to store a Transport-position
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="StartDate" type = "DateType"  >
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Starting date of the transportation
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Duration" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Duration of the service
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Dep">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Code of the Departure Airport
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Arr">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Code of the Arrival Airport
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Class" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Class of transportation (will be decomissioned in the next release, instead use CabinClass)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ServiceClass" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Description of the service class  (will be decomissioned in the next release, instead use CabinClass)
+Not used yet.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="CabinClass" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Type of travelclass. First, Business, Premium Economy or Economy)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Chain" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Flight chain
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Carrier" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Code of the Carrier of the first leg.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="FlightNr" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Flight number of the first leg without carrier code
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="5"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DepTime" type = "TimeType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Time of departure
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ArrTime" type = "TimeType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Time of arrival
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Adults" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of adults 
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Children" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of children
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Infants" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of infants
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="SeatReservation" type="Cancel-Reservation-SeatReservationType-Request" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="SpecialServiceRequest" type="Cancel-Reservation-SpecialServiceRequestType-Request" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Persons" type="Cancel-Reservation-PersonsType-Request" minOccurs="0"/>
+      <xsd:element name="Leg" type="Cancel-Reservation-LegType-Request" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Faq" type="Cancel-Reservation-FaqType-Request" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="ServiceType" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Type of transportation.
+F = flight
+B = Bus   (not used yet)
+T = train  (not used yet)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Key">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Internal key which must  be sent back by Nerus without any modification.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1000"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SegRef" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Indicates the position of this service in the service-list
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Direction">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Direction of the transportation.
+'H' = outbound transport
+'R' = inbound transport
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="ConfirmRQ" type = "YesNoType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Indicates the confirmation of the request, if the transportation is on request.
+'Y' = request confirmed
+'N' = request not confirmed (default)
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-FahType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        To store bookable information about hotel
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="StartDate" type = "DateType"  >
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Starting date of the service
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Duration">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Duration of the service
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Destination" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Destination code
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="LocationCode" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Location Code
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ExtBookID" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          BookingID in the external BedBank
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="16"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Product">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Product code (composed of hotel code and type)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Room">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Type of room
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Units" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of rooms in this line
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ExtraBeds" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of extra beds which have to be added to the room (only allowed for children)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Meal">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Type of board
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Adults" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of adults
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Children" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of children
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Infants" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of infants
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Persons" type="Cancel-Reservation-PersonsType-Request" minOccurs="0"/>
+      <xsd:element name="Faq" type="Cancel-Reservation-FaqType-Request" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="ServiceType" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          H = Accommodation
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Key">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Internal key used by NURVIS, which must be sent back by Nerus without any modification.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1000"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SegRef" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Is sent with an Fab request and indicates the position in the servicelist. Starting with "001"
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="ConfirmRQ" type = "YesNoType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Indicates the confirmation of the request, if the transportation is on request.
+'Y' = request confirmed
+'N' = request not confirmed (default)
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-FacType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        To store bookable information about insurance or extra-service
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="StartDate" type = "DateType"  >
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Starting date of the service
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Duration" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Duration of the service
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Code">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Code of the service
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Units" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of rooms in this line
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Adults" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of adults
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Children" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of children
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Infants" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of infants
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Persons" type="Cancel-Reservation-PersonsType-Request" minOccurs="0"/>
+      <xsd:element name="Faq" type="Cancel-Reservation-FaqType-Request" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="ServiceType" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Type of Service
+'I': insurance
+'L': extra service
+'P': Package (MFCA-product)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Key">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Internal key used by NURVIS which must be sent back by Nerus without any modification
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1000"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SegRef" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Is sent with an Fab request/response and indicates the position on the Servicelist. Starting with "001".
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="ConfirmRQ" type = "YesNoType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Indicates the confirmation of the request, if the transportation is on request.
+'Y' = request confirmed
+'N' = request not confirmed (default)
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-FaqType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Preferences
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Code">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Code of the Customer Request
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="TextV" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Variable text of customer Request when necessary
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="26"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="TextVLong" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Variable long text of customer Request when necessary
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="380"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="Confirmed">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Y = confirmed, N = not confirmed (default)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-FapType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        To store bookable information about a passenger
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="PersonType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Type of traveller or form of address.
+'1': masculine 
+'2': female    
+'4': infant     
+'3': child
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Sex" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          male or female (1=male,2=female)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Title" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Title of the person (optional)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Name">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Family name of the traveler
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="FirstName" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          First name of the traveler
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Age" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Age of the traveler (optional for adults, mandatory for children and infants)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Birth" type = "DateType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Date of Birth (optional)
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="PricePerson" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Sum of prices for the traveler.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+(,[0-9][0-9])?"/>
+            <xsd:maxLength value="12"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Nationality" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Nationality of the passenger
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Faq" type="Cancel-Reservation-FaqType-Request" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="ID" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Numeration of passengers beginning with 1
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Key">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Internal key used by NURVIS, which must be sent back by Nerus without any modification.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1000"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-PersonsType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        List of references to fap-elements
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="IdRef" minOccurs="0" maxOccurs="unbounded">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Reference to the ID of an fap-element
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-SalesType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Information about sales-price
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Amount" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Total sales price, including commission
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+(,[0-9][0-9])?"/>
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Currency" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Currency of given price
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="PaymentMethod" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Method of payment
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-MandatoryCostsType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Customer must pay this cost in destination - not to tour operator
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Amount" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Customer must pay this cost in destination - not to tour operator
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+(,[0-9][0-9])?"/>
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Currency" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Currency of given price
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-AggregatedCostsType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Cost for customer incl. Mandatory Costs
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Amount" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Cost for customer incl. Mandatory Costs
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+(,[0-9][0-9])?"/>
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Currency" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Currency of given price
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-PurchaseType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Information about sales-price (without commission)
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Amount" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Total sales price excluding commission
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+(,[0-9][0-9])?"/>
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Currency" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Currency of given price
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-FinalPaymentType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Information about Final Payment
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Amount" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Final Payment amount
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+(,[0-9][0-9])?"/>
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Currency" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Currency of Final Payment
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-DownPayType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Information about sales-price (without commission)
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Amount" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Total down payment amount
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+(,[0-9][0-9])?"/>
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Currency" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Currency of down payment amount
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-FeeType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Information about fees
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Amount" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Total fee for the actual modification or cancellation of the given booking
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+(,[0-9][0-9])?"/>
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Currency" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Currency of given fee
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-ExtCachePriceType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Information about external price
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Amount" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Total external price
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+(,[0-9][0-9])?"/>
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Currency" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Currency of external price
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-AccBalanceType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Information about account balance
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Amount" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Total amount due
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+(,[0-9][0-9])?"/>
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Currency" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Currency of amount due
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-CustomerType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Customer-data
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="C_Name" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          name of the customer
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_FirstName" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          first name of customer
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_Title" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          title of the customer
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_PersonType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Type of customer 
+'1': masculine 
+'2': female    
+'4': infant     
+'3': child
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="01"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_Country" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          country of customer
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="03"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_Language" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          language of customer
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="01"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_Street" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          street of adress
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="46"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_HouseNr" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          house-number of adress
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="08"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_POCode" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          po-code of adress
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_City" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          city of adress
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_AdrExtra" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          free-part of adress
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="30"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_TelNr" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Telephone-number
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="16"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_Mobile" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Mobile phone numer
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="16"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_HomeContactNr" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Emergency Contact
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="16"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_EMailUser" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          email-user (letters before @)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="64"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="C_EMailDomain" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          email-domain (letter after @)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="64"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-LegType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Leg-Information
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="DepDate" type = "DateType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Date of departure
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ArrDate" type = "DateType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Date of Arrival
+        </xsd:documentation>
+      </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Dep" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          IATA-Code departure-airport
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Arr" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          IATA-Code arrival-airport
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Class" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Class of the flight (will be decomissioned in the next release, instead use BookingClass)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ServiceClass" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          service of this seat (will be decomissioned in the next release, instead use CabinClass)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="CabinClass" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Type of travelclass. First, Business, Premium Economy or Economy)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="BookingClass" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Type of booking class which can offer different conditions and benefits within the same cabin class
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Carrier" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Carrier-code
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="FlightNr" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Flight-number
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="5"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DepTime" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Departure-time
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ArrTime" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Arrival-time
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="SeatReservation" type="Cancel-Reservation-SeatReservationType-Request" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="SpecialServiceRequest" type="Cancel-Reservation-SpecialServiceRequestType-Request" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="LuggageInfo" type="Cancel-Reservation-LuggageInfoType-Request" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="Key">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Internal key used by NURVIS which must be sent back by Nerus without any modification.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1000"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="External" type = "YesNoType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          External=Y when the Leg is booked with an external booking system
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-ManualFeeType-Request">
+    <xsd:sequence>
+      <xsd:element name="ValueType" minOccurs="0">
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Amount" minOccurs="0">
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="-?[0-9]+"/>
+            <xsd:maxLength value="5"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-LuggageInfoType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Luggage information
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Quantity" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Number of bags/pieces
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Weight" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Weight per piece
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="TotalWeight" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Total weight
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Unit" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Unit of the weight
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-SeatReservationType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Booked Seats in Booking
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="Key">
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="IdRef">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Reference to the ID of an fap-element
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Row">
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="Seat">
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SeatCategory">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Category of the selected seat
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-SpecialServiceRequestType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Booked Seats in Booking
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="Key">
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="IdRef">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Reference to the ID of an fap-element
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="SSRCode">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          IATA Code of SSR (Target from AVC-Product)
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="Cancel-Reservation-ManualPricesType-Request">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        Manual Pricecorrections
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ManualPriceFunction" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Functiontype of manual price
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ManualPriceType" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Pricetype of manual price
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ManualPriceNumber" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Pricenumer of manual price
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ManualPriceAmount" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Amount / sum of manual price
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ManualPricePercent" minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="EN">
+          Percent of manual price
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="5"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+     <xsd:simpleType name="DateType">
+        <xsd:restriction base="xsd:string">
+           <xsd:maxLength value="8"/>
+            <xsd:pattern value="(([0-2][0-9])|(3[0-1]))(0[1-9]|1[0-2])(19|2[0-9])[0-9][0-9]"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+     <xsd:simpleType name="DateType2">
+        <xsd:restriction base="xsd:string">
+           <xsd:maxLength value="10"/>
+            <xsd:pattern value="(([0-2][0-9])|(3[0-1])).(0[1-9]|1[0-2]).(19|2[0-9])[0-9][0-9]"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+     <xsd:simpleType name="DateTimeType">
+        <xsd:restriction base="xsd:string">
+           <xsd:maxLength value="14"/>
+            <xsd:pattern value="(([0-2][0-9])|(3[0-1]))(0[1-9]|1[0-2])(19|2[0-9])[0-9][0-9](([0-1][0-9])|(2[0-3]))[0-5][0-9][0-5][0-9]"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="TimeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+            <xsd:pattern value="(([0-1][0-9])|(2[0-3]))[0-5][0-9]"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="YesNoType">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+            <xsd:pattern value="(N|Y)"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>
