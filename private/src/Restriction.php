@@ -10,10 +10,10 @@ require_once 'Base.php';
 
 class Restriction extends Base {
 	/** @var string  */
-	protected $_base = '';
+	protected string $_base = '';
 
 	/** @var array  */
-	protected $_values = [];
+	protected array $_values = [];
 
 	/**
 	 * @return string
@@ -47,14 +47,14 @@ class Restriction extends Base {
 		$this->_values = $values;
 	}
 
-	/**
-	 * Restriction constructor.
-	 *
-	 * @param DOMNode $DOMNode
-	 */
+    /**
+     * @param $DOMNode
+     * @param $DOMXPath
+     * @throws Exception
+     */
 	public function __construct(
-		DOMNode $DOMNode,
-		DOMXPath $DOMXPath
+		$DOMNode,
+		$DOMXPath
 	) {
 		parent::__construct($DOMXPath);
 		$this->setBase(strtolower($DOMNode->getAttribute('base')));

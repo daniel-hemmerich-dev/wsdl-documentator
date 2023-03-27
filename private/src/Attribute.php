@@ -10,13 +10,13 @@ require_once 'Element.php';
 
 class Attribute extends Element {
 	/** @var string  */
-	protected $_name = '';
+	protected string $_name = '';
 
 	/** @var string  */
-	protected $_type = '';
+	protected string $_type = '';
 
 	/** @var string  */
-	protected $_use = '';
+	protected string $_use = '';
 
 	/** @var null  */
 	protected $_restriction = null;
@@ -24,7 +24,7 @@ class Attribute extends Element {
 	/**
 	 * @return string
 	 */
-	public function getName() : string {
+	public function getName(): string {
 		return $this->_name;
 	}
 
@@ -38,7 +38,7 @@ class Attribute extends Element {
 	/**
 	 * @return string
 	 */
-	public function getType() : string {
+	public function getType(): string {
 		return $this->_type;
 	}
 
@@ -52,7 +52,7 @@ class Attribute extends Element {
 	/**
 	 * @return string
 	 */
-	public function getUse() : string {
+	public function getUse(): string {
 		return $this->_use;
 	}
 
@@ -79,12 +79,11 @@ class Attribute extends Element {
 		$this->_restriction = $restriction;
 	}
 
-	/**
-	 * Attribute constructor.
-	 *
-	 * @param DOMNode $DOMNode
-	 * @param DOMXPath $DOMXPath
-	 */
+    /**
+     * @param DOMNode $DOMNode
+     * @param DOMXPath $DOMXPath
+     * @throws Exception
+     */
 	public function __construct(
 		DOMNode $DOMNode,
 		DOMXPath $DOMXPath

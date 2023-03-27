@@ -12,25 +12,25 @@ require_once 'Attribute.php';
 
 class Node extends Element {
 	/** @var array */
-	protected $_nodes = [];
+	protected array $_nodes = [];
 
 	/** @var string  */
-	protected $_name = '';
+	protected string $_name = '';
 
 	/** @var string  */
-	protected $_type = '';
+	protected string $_type = '';
 
 	/** @var int  */
-	protected $_min_occurances = 1;
+	protected int $_min_occurances = 1;
 
 	/** @var int  */
-	protected $_max_occurances = 1;
+	protected int $_max_occurances = 1;
 
 	/** @var null  */
 	protected $_restriction = null;
 
 	/** @var array  */
-	protected $_attributes = [];
+	protected array $_attributes = [];
 
 	/**
 	 * @return null
@@ -49,7 +49,7 @@ class Node extends Element {
 	/**
 	 * @return string
 	 */
-	public function getName() : string {
+	public function getName(): string {
 		return $this->_name;
 	}
 
@@ -63,7 +63,7 @@ class Node extends Element {
 	/**
 	 * @return string
 	 */
-	public function getType() : string {
+	public function getType(): string {
 		return $this->_type;
 	}
 
@@ -77,7 +77,7 @@ class Node extends Element {
 	/**
 	 * @return int
 	 */
-	public function getMinOccurances() : int {
+	public function getMinOccurances(): int {
 		return $this->_min_occurances;
 	}
 
@@ -91,7 +91,7 @@ class Node extends Element {
 	/**
 	 * @return int
 	 */
-	public function getMaxOccurances() : int {
+	public function getMaxOccurances(): int {
 		return $this->_max_occurances;
 	}
 
@@ -102,12 +102,13 @@ class Node extends Element {
 		$this->_max_occurances = $max_occurances;
 	}
 
-	/**
-	 * Type constructor.
-	 *
-	 * @param DOMNode $DOMNode
-	 * @param DOMXPath $DOMXPath
-	 */
+    /**
+     * Type constructor.
+     *
+     * @param DOMNode $DOMNode
+     * @param DOMXPath $DOMXPath
+     * @throws Exception
+     */
 	public function __construct (
 		DOMNode $DOMNode,
 		DOMXPath $DOMXPath
@@ -166,35 +167,37 @@ class Node extends Element {
 	/**
 	 * @return array
 	 */
-	public function getNodes () : array {
+	public function getNodes (): array {
 		return $this->_nodes;
 	}
 
 	/**
 	 * @return array
 	 */
-	public function getAttributes () : array {
+	public function getAttributes (): array {
 		return $this->_attributes;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isComplex () : bool {
+	public function isComplex (): bool {
 		return (count($this->getNodes()) > 0 || count($this->getAttributes()) > 0);
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isSimple () : bool {
+	public function isSimple (): bool {
 		return (0 == count($this->getNodes()));
 	}
 
-	/**
-	 * @param DOMNode $DOMNode
-	 */
-	protected function _initialize(DOMNode $DOMNode) {
+    /**
+     * @param $DOMNode
+     * @return void
+     * @throws Exception
+     */
+	protected function _initialize($DOMNode): void {
 		$documentations = $this->getXpath()->evaluate(
 			XSD::NAMESPACE . ':annotation/' . XSD::NAMESPACE . ':documentation',
 			$DOMNode

@@ -11,73 +11,79 @@ class View {
 	const INDEND_OFFSET = 4;
 
 	/** @var string  */
-	protected $_html = '';
+	protected string $_html = '';
 
 	/** @var string  */
-	protected $_selected_version = '';
+	protected string $_selected_version = '';
 
 	/** @var string  */
-	protected $_selected_dialect = '';
+	protected string $_selected_dialect = '';
 
 	/** @var string  */
-	protected $_pdf = '';
+	protected string $_pdf = '';
 
 	/** @var array  */
-	protected $_parameter = [];
+	protected array $_parameter = [];
 
 	/** @var array  */
-	protected $_examples = [];
+	protected array $_examples = [];
 
 	/**
 	 * @return string
 	 */
-	public function getHtml() : string {
+	public function getHtml(): string
+    {
 		return $this->_html;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getSelectedVersion() : string {
+	public function getSelectedVersion(): string
+    {
 		return $this->_selected_version;
 	}
 
 	/**
 	 * @param string $selected_version
 	 */
-	public function setSelectedVersion(string $selected_version) {
+	public function setSelectedVersion(string $selected_version): void
+    {
 		$this->_selected_version = $selected_version;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getSelectedDialect() : string {
+	public function getSelectedDialect(): string
+    {
 		return $this->_selected_dialect;
 	}
 
 	/**
 	 * @param string $selected_dialect
 	 */
-	public function setSelectedDialect(string $selected_dialect) {
+	public function setSelectedDialect(string $selected_dialect): void
+    {
 		$this->_selected_dialect = $selected_dialect;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getPdf(): string {
+	public function getPdf(): string
+    {
 		return $this->_pdf;
 	}
 
-	/**
-	 * View constructor.
-	 *
-	 * @param string $title
-	 * @param array $versions
-	 * @param string $selected_version
-	 * @param string $_selected_dialect
-	 */
+    /**
+     * View constructor.
+     *
+     * @param string $title
+     * @param array $versions
+     * @param string $selected_version
+     * @param string $selected_dialect
+     */
 	public function __construct(
 		string $title,
 		array $versions,
@@ -113,7 +119,8 @@ class View {
 	protected function addContent(
 		string $content,
 		bool $print = true
-	) {
+	): void
+    {
 		$this->_html .= $content;
 		if($print) {
 			$this->_pdf .= $content;
@@ -125,7 +132,8 @@ class View {
 	 */
 	protected function _initializeHedaer(
 		string $title
-	) {
+	): void
+    {
 		$this->addContent("\t<head>\n");
 		//$this->addContent("\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"private/vendor/twbs/bootstrap/dist/css/bootstrap.min.css\">\n");
 		$this->addContent("\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\">\n");
@@ -141,7 +149,8 @@ class View {
 	protected function _initializeBody(
 		string $title,
 		array $versions
-	) {
+	): void
+    {
 		$this->addContent("\t<body>\n");
 
 		$this->addContent("\t\t<h1>" . $title . "</h1>\n");
@@ -177,7 +186,7 @@ class View {
 		if('' != $query_string) {
 			$action .= '?' . $query_string;
 		}
-		$this->addContent("\t\t<form method='post' action={$action}>\n", false);
+		$this->addContent("\t\t<form method='post' action=$action>\n", false);
 		$this->addContent("\t\t\t<input type='submit' name='export' value='Export'>\n", false);
 		$this->addContent("\t\t</form><br>\n", false);
 		$this->addContent("\t\t<h2>Legend</h2>\n");
@@ -191,30 +200,31 @@ class View {
 	/**
 	 * @param array $version
 	 */
-	protected function _initiliazeMethods(array $version) {
+	protected function _initiliazeMethods(array $version): void
+    {
 		$this->addContent("\t\t<h2>Methods</h2>\n");
 
 		foreach($version['methods'] as $name => $method) {
-			$this->addContent("\t\t<h3><a href='" . "#" . "{$name}'>{$name}</a></h3>\n");
+			$this->addContent("\t\t<h3><a href='" . "#" . "$name'>$name</a></h3>\n");
 		}
 
 		$this->addContent("\t\t<br><br>\n");
 		foreach($version['methods'] as $name => $method) {
-			$this->addContent("\t\t<h3 id='{$name}'>$name</h3>\n");
+			$this->addContent("\t\t<h3 id='$name'>$name</h3>\n");
 
-			$this->addContent("\t\t<h4><a href='" . "#" . "{$name}-Description'>Description</a></h4>\n");
-			$this->addContent("\t\t<h4><a href='" . "#" . "{$name}-Request-Tree'>Request-Tree</a></h4>\n");
-			$this->addContent("\t\t<h4><a href='" . "#" . "{$name}-Request-Examples'>Request-Examples</a></h4>\n");
-			$this->addContent("\t\t<h4><a href='" . "#" . "{$name}-Request-Elements'>Request-Elements</a></h4>\n");
-			$this->addContent("\t\t<h4><a href='" . "#" . "{$name}-Response-Tree'>Response-Tree</a></h4>\n");
-			$this->addContent("\t\t<h4><a href='" . "#" . "{$name}-Response-Examples'>Response-Examples</a></h4>\n");
-			$this->addContent("\t\t<h4><a href='" . "#" . "{$name}-Response-Elements'>Response-Elements</a></h4><br>\n");
+			$this->addContent("\t\t<h4><a href='" . "#" . "$name-Description'>Description</a></h4>\n");
+			$this->addContent("\t\t<h4><a href='" . "#" . "$name-Request-Tree'>Request-Tree</a></h4>\n");
+			$this->addContent("\t\t<h4><a href='" . "#" . "$name-Request-Examples'>Request-Examples</a></h4>\n");
+			$this->addContent("\t\t<h4><a href='" . "#" . "$name-Request-Elements'>Request-Elements</a></h4>\n");
+			$this->addContent("\t\t<h4><a href='" . "#" . "$name-Response-Tree'>Response-Tree</a></h4>\n");
+			$this->addContent("\t\t<h4><a href='" . "#" . "$name-Response-Examples'>Response-Examples</a></h4>\n");
+			$this->addContent("\t\t<h4><a href='" . "#" . "$name-Response-Elements'>Response-Elements</a></h4><br>\n");
 
-			$this->addContent("\t\t<h4 id='" . $name . "-Description" . "'>{$name}-Description</h4>\n");
+			$this->addContent("\t\t<h4 id='" . $name . "-Description" . "'>$name-Description</h4>\n");
 			$this->addContent("\t\t<p>" . $method['request']->getSchema()->getDocumentation() . "</p><br>\n");
 
 			if(isset($method['request'])) {
-				$this->addContent("\t\t<h4 id='" . $name . "-Request-Tree" . "'>{$name}-Request-Tree</h4>\n");
+				$this->addContent("\t\t<h4 id='" . $name . "-Request-Tree" . "'>$name-Request-Tree</h4>\n");
 				$this->addContent("\t\t<div>\n");
 				$this->_initializeSchema(
 					$name,
@@ -223,10 +233,10 @@ class View {
 				);
 				$this->addContent("\t\t</div><br>\n");
 
-				$this->addContent("\t\t<h4 id='" . $name . "-Request-Examples" . "'>{$name}-Request-Examples</h4>\n");
+				$this->addContent("\t\t<h4 id='" . $name . "-Request-Examples" . "'>$name-Request-Examples</h4>\n");
 				$this->_initializeExample($method['request']);
 
-				$this->addContent("\t\t<h4 id='" . $name . "-Request-Elements" . "'>{$name}-Request-Elements</h4>\n");
+				$this->addContent("\t\t<h4 id='" . $name . "-Request-Elements" . "'>$name-Request-Elements</h4>\n");
 				$this->_initializeParameterOverview(
 					$name,
 					'request'
@@ -235,7 +245,7 @@ class View {
 			}
 
 			if(isset($method['response'])) {
-				$this->addContent("\t\t<h4 id='" . $name . "-Response-Tree" . "'>{$name}-Response-Tree</h4>\n");
+				$this->addContent("\t\t<h4 id='" . $name . "-Response-Tree" . "'>$name-Response-Tree</h4>\n");
 				$this->addContent("\t\t<div>\n");
 				$this->_initializeSchema(
 					$name,
@@ -244,10 +254,10 @@ class View {
 				);
 				$this->addContent("\t\t</div><br>\n");
 
-				$this->addContent("\t\t<h4 id='" . $name . "-Response-Examples" . "'>{$name}-Response-Examples</h4>\n");
+				$this->addContent("\t\t<h4 id='" . $name . "-Response-Examples" . "'>$name-Response-Examples</h4>\n");
 				$this->_initializeExample($method['response']);
 
-				$this->addContent("\t\t<h4 id='" . $name . "-Response-Elements" . "'>{$name}-Response-Elements</h4>\n");
+				$this->addContent("\t\t<h4 id='" . $name . "-Response-Elements" . "'>$name-Response-Elements</h4>\n");
 				$this->_initializeParameterOverview(
 					$name,
 					'response'
@@ -260,21 +270,22 @@ class View {
 	}
 
 	/**
-	 * @param string $methodname
+	 * @param string $method
 	 * @param string $suffix
 	 * @param XSD $xsd
 	 */
 	protected function _initializeSchema(
-		string $methodname,
+	    string $method,
 		string $suffix,
-		XSD $xsd
-	) {
+		XSD    $xsd
+	): void
+    {
 		$schema = $xsd->getSchema();
 		$nodes = $schema->getNodes();
 
 		foreach($nodes as $node) {
 			$this->_initializeNodes(
-				$methodname,
+				$method,
 				$suffix,
 				$node,
 				0
@@ -283,18 +294,19 @@ class View {
 	}
 
 	/**
-	 * @param string $methodname
+	 * @param string $method
 	 * @param string $suffix
 	 * @param Node $node
-	 * @param int $indend
+	 * @param int $intend
 	 */
 	protected function _initializeNodes (
-		string $methodname,
+		string $method,
 		string $suffix,
-		Node $node,
-		int $indend
-	) {
-		$this->addContent($this->_noBackspaces($indend) . '<a href="#' . $methodname . '-' . $suffix . '-parameter-element-' . $node->getName() . '">' . $node->getName() . '</a>');
+		Node   $node,
+		int $intend
+	): void
+    {
+		$this->addContent($this->_noBackspaces($intend) . '<a href="#' . $method . '-' . $suffix . '-parameter-element-' . $node->getName() . '">' . $node->getName() . '</a>');
 
 		if(0 == $node->getMinOccurances()) {
 			if(99999 != $node->getMaxOccurances() && 1 != $node->getMaxOccurances()) {
@@ -326,7 +338,7 @@ class View {
 		}
 
 		foreach($attributes as $attribute_number => $attribute) {
-			$this->addContent('<a href="#' . $methodname . '-' . $suffix . '-parameter-attribute-' . $attribute->getName() . '">' . $attribute->getName() . '</a>');
+			$this->addContent('<a href="#' . $method . '-' . $suffix . '-parameter-attribute-' . $attribute->getName() . '">' . $attribute->getName() . '</a>');
 			if('' == $attribute->getUse()) {
 				$this->addContent('<a href="#legend-question-mark">' . $this->_noBackspaces(1) . '?</a>');
 			}
@@ -351,24 +363,26 @@ class View {
 		foreach($childNodes as $childNode) {
 			$this->addContent("<br>");
 			$this->_initializeNodes(
-				$methodname,
+				$method,
 				$suffix,
 				$childNode,
-				$indend + self::INDEND_OFFSET
+				$intend + self::INDEND_OFFSET
 			);
 		}
 	}
 
-	/**
-	 * @param XSD $xsd
-	 */
-	protected function _checkNodeExamples(DOMNode $DOMNode) {
+    /**
+     * @param DOMNode $DOMNode
+     */
+	protected function _checkNodeExamples(DOMNode $DOMNode): void
+    {
 		$examples = [];
-		foreach($DOMNode->getNodes() as $child) {
+		foreach($DOMNode->childNodes as $index => $child) {
 			if($this->_parseNodeExamples(
-				$child
+				$child,
+                $index
 			)) {
-				$examples[] = $DOMNode->getName();
+				$examples[] = $DOMNode->nodeName;
 			}
 		}
 
@@ -380,7 +394,8 @@ class View {
 	/**
 	 * @param XSD $xsd
 	 */
-	protected function _initializeExample(XSD $xsd) {
+	protected function _initializeExample(XSD $xsd): void
+    {
 		$schema = $xsd->getSchema();
 		$nodes = $schema->getNodes();
 
@@ -423,8 +438,9 @@ class View {
 	 */
 	protected function _parseNodeExamples (
 		Node $node,
-		int $example
-	) : bool {
+        int $example
+	): bool
+    {
 		if($node->isSimple()) {
 			return $node->hasExample($example);
 		} else {
@@ -443,15 +459,16 @@ class View {
 	/**
 	 * @param Node $node
 	 * @param int $example_index
-	 * @param int $indend
+	 * @param int $intend
 	 *
 	 * @return bool
 	 */
 	protected function _initializeNodeExamples (
 		Node $node,
 		int $example_index,
-		int $indend
-	) : bool {
+		int $intend
+	): bool
+    {
 		if($node->isSimple()) {
 			if(!$node->hasExample($example_index)) {
 				return false;
@@ -463,10 +480,10 @@ class View {
 			return false;
 		}
 
-		$this->addContent($this->_noBackspaces($indend) . htmlspecialchars('<' . $node->getName()));
+		$this->addContent($this->_noBackspaces($intend) . htmlspecialchars('<' . $node->getName()));
 
 		$attributes = $node->getAttributes();
-		foreach($attributes as $attribute_number => $attribute) {
+		foreach($attributes as $attribute) {
 			if(!$attribute->hasExample($example_index)) {
 				continue;
 			}
@@ -484,7 +501,7 @@ class View {
 			$examples_available = $this->_initializeNodeExamples(
 				$childNode,
 				$example_index,
-				$indend + self::INDEND_OFFSET
+				$intend + self::INDEND_OFFSET
 			);
 			if($examples_available) {
 				$this->addContent("<br>");
@@ -492,7 +509,7 @@ class View {
 		}
 
 		if(count($childNodes) > 0) {
-			$this->addContent($this->_noBackspaces($indend) . htmlspecialchars('</' . $node->getName() . '>') . "\n");
+			$this->addContent($this->_noBackspaces($intend) . htmlspecialchars('</' . $node->getName() . '>') . "\n");
 		} else {
 			$this->addContent(htmlspecialchars($node->getExampleByIndex($example_index) . '</' . $node->getName() . '>') . "\n");
 		}
@@ -508,7 +525,8 @@ class View {
 	protected function _initializeParameterOverview(
 		string $methodname,
 		string $suffix
-	) {
+	): void
+    {
 		ksort($this->_parameter);
 
 		$this->addContent("\t\t<table>\n");
@@ -523,7 +541,7 @@ class View {
 		foreach($this->_parameter as $name => $parameter) {
 			$id = $methodname . '-' . $suffix . '-parameter-' . ('@' == $name[0] ? 'attribute' : 'element') . '-' . ('@' == $name[0] ? substr($name, 1) : $name);
 			$this->addContent("\t\t\t<tr>\n");
-			$this->addContent("\t\t\t<td id='{$id}'>{$name}</td>\n");
+			$this->addContent("\t\t\t<td id='$id'>$name</td>\n");
 			$this->addContent("\t\t\t<td>{$parameter['type']}</td>\n");
 			$this->addContent("\t\t\t<td>{$parameter['restriction']}</td>\n");
 			$this->addContent("\t\t\t<td>{$parameter['example']}</td>\n");
@@ -539,7 +557,8 @@ class View {
 	 *
 	 * @return string
 	 */
-	protected function _noBackspaces (int $indent) {
+	protected function _noBackspaces (int $indent): string
+    {
 		return implode(
 			'',
 			array_fill(
@@ -547,7 +566,7 @@ class View {
 				$indent,
 				'&nbsp;'
 			)
-			);
+        );
 	}
 
 	/**
@@ -561,7 +580,8 @@ class View {
      * @param array $parameter
      * @return string
      */
-	public function createURL(array $parameter) {
+	public function createURL(array $parameter): string
+    {
         if(false !== stripos(
                 "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",
                 'https://tcxml.de-dc.thomascook.com'

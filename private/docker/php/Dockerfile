@@ -1,4 +1,4 @@
-FROM php:5.0-fpm
+FROM php:8-fpm
 
 RUN apt-get update \
     && apt-get install -y zlib1g-dev libpng-dev \

@@ -6,6 +6,8 @@
  * Time: 20:55
  */
 
+use JetBrains\PhpStorm\NoReturn;
+
 error_reporting(E_ALL);
 set_error_handler("errorHandler");
 set_exception_handler("exceptionHandler");
@@ -14,7 +16,8 @@ set_exception_handler("exceptionHandler");
 /**
  * @param string $message
  */
-function logError(string $message) {
+function logError(string $message): void
+{
     error_log(trim($message));
 
     file_put_contents(
@@ -25,17 +28,19 @@ function logError(string $message) {
 }
 
 /**
- * @param $iCode
- * @param $sMessage
- * @param $sFile
- * @param $iLine
+ * @param int $code
+ * @param string $message
+ * @param string $file
+ * @param int $line
+ * @return mixed
+ * @throws ErrorException
  */
 function errorHandler(
-	$code,
-	$message,
-	$file,
-	$line
-)
+	int $code,
+	string $message,
+	string $file,
+	int $line
+): mixed
 {
     throw new ErrorException(
         $message,
@@ -49,9 +54,10 @@ function errorHandler(
 /**
  * @param Throwable $throwable
  */
+#[NoReturn]
 function exceptionHandler(
 	Throwable $throwable
-)
+): void
 {
     logError($throwable);
     exit($throwable->getMessage() . "\n");

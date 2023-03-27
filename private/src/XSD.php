@@ -10,48 +10,48 @@ require_once 'Base.php';
 require_once 'Schema.php';
 
 class XSD extends Base {
-	const NAMESPACE = 'xsd';
+    const NAMESPACE = '';
 
-	/** @var null  */
-	protected $_dom = null;
+	/** @var DOMDocument  */
+	protected DOMDocument $_dom;
 
-	/** @var null  */
-	protected $_schema = null;
+	/** @var Schema  */
+	protected Schema $_schema;
 
 	/**
 	 * @return DOMDocument
 	 */
-	public function getDom() : DOMDocument {
+	public function getDom(): DOMDocument
+    {
 		return $this->_dom;
 	}
 
 	/**
-	 * @param null $dom
+	 * @param DOMDocument $dom
 	 */
 	public function setDom(DOMDocument $dom) {
 		$this->_dom = $dom;
 	}
 
 	/**
-	 * @return null
+	 * @return Schema
 	 */
-	public function getSchema() {
+	public function getSchema(): Schema {
 		return $this->_schema;
 	}
 
 	/**
-	 * @param null $schema
+	 * @param Schema $schema
 	 */
-	public function setSchema($schema) {
+	public function setSchema(Schema $schema) {
 		$this->_schema = $schema;
 	}
 
-	/**
-	 * XSD constructor.
-	 *
-	 * @param string $xsd
-	 */
-	public function __construct(string $xsd) {
+    /**
+     * @param $xsd
+     * @throws Exception
+     */
+	public function __construct($xsd) {
 		$doc = new DOMDocument();
 		$doc->loadXML(
 			mb_convert_encoding(
@@ -63,7 +63,7 @@ class XSD extends Base {
 			$doc
 		);
 		$xpath->registerNamespace(
-			self::NAMESPACE,
+			'xsd',
 			'http://www.w3.org/2001/XMLSchema'
 		);
 
@@ -71,7 +71,7 @@ class XSD extends Base {
 		parent::__construct($xpath);
 
 		$schema = $this->getXpath()->evaluate(
-			'/' . self::NAMESPACE . ':schema'
+			'/' . 'xsd' . ':schema'
 		);
 		$this->setSchema(
 			new Schema(

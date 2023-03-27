@@ -11,18 +11,18 @@ require_once 'Node.php';
 
 class Schema extends Base {
 	/** @var string  */
-	protected $_xmlns = '';
+	protected string $_xmlns = '';
 
 	/** @var array  */
-	protected $nodes = [];
+	protected array $nodes = [];
 
 	/** @var string  */
-	protected $_documentation = '';
+	protected string $_documentation = '';
 
 	/**
 	 * @return string
 	 */
-	public function getXmlns() : string {
+	public function getXmlns(): string {
 		return $this->_xmlns;
 	}
 
@@ -36,14 +36,14 @@ class Schema extends Base {
 	/**
 	 * @return array
 	 */
-	public function getNodes() : array {
+	public function getNodes(): array {
 		return $this->nodes;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getDocumentation() : string {
+	public function getDocumentation(): string {
 		return $this->_documentation;
 	}
 
@@ -54,11 +54,11 @@ class Schema extends Base {
 		$this->_documentation = $documentation;
 	}
 
-	/**
-	 * Schema constructor.
-	 *
-	 * @param XSD $xsd
-	 */
+    /**
+     * @param DOMNode $DOMNode
+     * @param DOMXPath $DOMXPath
+     * @throws Exception
+     */
 	public function __construct(
 		DOMNode $DOMNode,
 		DOMXPath $DOMXPath
@@ -68,10 +68,12 @@ class Schema extends Base {
 		$this->_initialize($DOMNode);
 	}
 
-	/**
-	 * @param DOMNode $DOMNode
-	 */
-	protected function _initialize(DOMNode $DOMNode) {
+    /**
+     * @param DOMNode $DOMNode
+     * @return void
+     * @throws Exception
+     */
+	protected function _initialize(DOMNode $DOMNode): void {
 		$documentations = $this->getXpath()->evaluate(
 			XSD::NAMESPACE . ':annotation/' . XSD::NAMESPACE . ':documentation',
 			$DOMNode
@@ -83,10 +85,12 @@ class Schema extends Base {
 		$this->_initializeElements($DOMNode);
 	}
 
-	/**
-	 * @param DOMNode $DOMNode
-	 */
-	protected function _initializeElements(DOMNode $DOMNode) {
+    /**
+     * @param DOMNode $DOMNode
+     * @return void
+     * @throws Exception
+     */
+	protected function _initializeElements(DOMNode $DOMNode): void {
 		$nodes = $this->getXpath()->evaluate(
 			XSD::NAMESPACE . ':element',
 			$DOMNode

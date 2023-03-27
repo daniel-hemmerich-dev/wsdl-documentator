@@ -6,13 +6,15 @@
  * Time: 20:34
  */
 
+use Mpdf\Mpdf;
+
 try {
 	require_once __DIR__ . '/setup.php';
 	require_once __DIR__ . '/../vendor/autoload.php';
 	require_once __DIR__ . '/XSD.php';
 	require_once __DIR__ . '/View.php';
 
-	$title = 'NURVIS online documentation';
+	$title = 'WSD online documentation';
 	$versions = [];
 
 	$dir = new RecursiveIteratorIterator(
@@ -60,12 +62,12 @@ try {
 	$view = new View(
 		$title,
 		$versions,
-		$_GET['version'] ?? $version_number,
-		$_GET['dialect'] ?? $dialect
+		$_GET['version'] ?: $version_number,
+		$_GET['dialect'] ?: $dialect
 	);
 
 	if(isset($_POST['export'])) {
-		$mpdf = new \Mpdf\Mpdf();
+		$mpdf = new Mpdf();
 		$mpdf->WriteHTML($view->getPdf());
 		$mpdf->Output();
 	} else {

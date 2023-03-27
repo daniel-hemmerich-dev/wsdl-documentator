@@ -10,7 +10,7 @@ require_once 'Base.php';
 
 class Element extends Base {
 	/** @var string  */
-	const EXAMPLE_REGEX = "/\[examples:\s*(.+)\]/mi";
+	const EXAMPLE_REGEX = '/\[examples:\s*(.+)\]/mi';
 
 	/** @var string  */
 	const EXAMPLE_DELIMITER = ',';
@@ -19,18 +19,18 @@ class Element extends Base {
 	const EXAMPLE_EMPTY = '';
 
 	/** @var string  */
-	protected $_example = '';
+	protected string $_example = '';
 
 	/** @var array  */
-	protected $_examples = [];
+	protected array $_examples = [];
 
 	/** @var string  */
-	protected $_documentation = '';
+	protected string $_documentation = '';
 
 	/**
 	 * @return string
 	 */
-	public function getExample() : string {
+	public function getExample(): string {
 		return $this->_example;
 	}
 
@@ -53,14 +53,14 @@ class Element extends Base {
 	 *
 	 * @return bool
 	 */
-	public function hasExample(int $index) {
+	public function hasExample(int $index): bool {
 		return isset($this->_examples[$index]) && (self::EXAMPLE_EMPTY != $this->_examples[$index]);
 	}
 
 	/**
 	 * @return array
 	 */
-	public function getExamples() : array {
+	public function getExamples(): array {
 		return $this->_examples;
 	}
 
@@ -69,8 +69,8 @@ class Element extends Base {
 	 *
 	 * @return string
 	 */
-	public function getExampleByIndex(int $index) : string {
-		return $this->_examples[$index] ?? '';
+	public function getExampleByIndex(int $index): string {
+		return $this->_examples[$index] ?: '';
  	}
 
 	/**
@@ -83,7 +83,7 @@ class Element extends Base {
 	/**
 	 * @return string
 	 */
-	public function getDocumentation() : string {
+	public function getDocumentation(): string {
 		return $this->_documentation;
 	}
 
@@ -103,17 +103,14 @@ class Element extends Base {
 	 *
 	 * @return string
 	 */
-	protected function _parseExample(DOMNode $DOMNode) : string {
+	protected function _parseExample(DOMNode $DOMNode): string  {
 		$example = [];
 		preg_match(
 			self::EXAMPLE_REGEX,
 			$DOMNode->nodeValue,
 			$example
 		);
-		if(isset($example[1])) {
-			return $example[1];
-		} else {
-			return '';
-		}
+
+        return $example[1] ?? '';
 	}
 }

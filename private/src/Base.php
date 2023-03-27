@@ -7,20 +7,22 @@
  */
 
 class Base {
-	/** @var null  */
-	protected $_xpath = null;
+	/** @var DOMXPath  */
+	protected DOMXPath $_xpath;
 
 	/**
-	 * @return null
+	 * @return DOMXPath
 	 */
-	public function getXpath() : DOMXPath {
+	public function getXpath(): DOMXPath
+    {
 		return $this->_xpath;
 	}
 
 	/**
-	 * @param null $xpath
+	 * @param DOMXPath $xpath
 	 */
-	public function setXpath(DOMXPath $xpath) {
+	public function setXpath(DOMXPath $xpath): void
+    {
 		$this->_xpath = $xpath;
 	}
 
